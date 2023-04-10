@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Tableau filtrable</title>
+  <style>
+    /* Style de base pour le tableau */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    
+    th {
+      background-color: #f2f2f2;
+    }
+    
+    /* Style pour l'input de filtrage */
+    #input {
+      margin-bottom: 10px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" id="input" placeholder="Filtrer...">
+  <table id="table">
+    <thead>
+      <tr>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Âge</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>25</td>
+      </tr>
+      <tr>
+        <td>Jane</td>
+        <td>Doe</td>
+        <td>30</td>
+      </tr>
+      <tr>
+        <td>Bob</td>
+        <td>Smith</td>
+        <td>40</td>
+      </tr>
+      <tr>
+        <td>Alice</td>
+        <td>Johnson</td>
+        <td>35</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <script>
+    // Récupération des éléments HTML nécessaires
+    const input = document.querySelector('#input');
+    const table = document.querySelector('#table');
+    const rows = table.querySelectorAll('tr');
+    
+    // Fonction de filtrage des lignes du tableau
+    function filterRows() {
+      const filterValue = input.value.toLowerCase(); // Valeur saisie par l'utilisateur, en minuscules pour faciliter la comparaison
+      rows.forEach(row => {
+        const text = row.textContent.toLowerCase(); // Contenu de la ligne, en minuscules
+        if (text.includes(filterValue)) {
+          row.style.display = ''; // Affichage de la ligne si elle contient la valeur recherchée
+        } else {
+          row.style.display = 'none'; // Masquage de la ligne sinon
+        }
+      });
+    }
+    
+    // Écouteur d'événement sur la saisie dans l'input
+    input.addEventListener('input', filterRows);
+  </script>
+</body>
+</html>
